@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!
+{% endblock %}
+
+{% block body %}
+
+	<h1>Category :{{ category.Title }}</h1>
+
+
+	{# <a href="{{ path('category_item',{ id: category.id })}}">
+								{{ category.name }}
+							</a> #}
+
+	<ul>
+		{% for product in category.products %}
+			<li>
+				<a href="{{ path('product_item', {id: product.id})}}">{{ product.Name }}</a>
+				-
+				{{ product.dateCreated|date("m/d/Y") }}
+			</li>
+		{% endfor %}
+	</ul>
+
+{% endblock %}
