@@ -10,28 +10,33 @@
 			<p class="lead">E-shop is a shop in line, here you could find most of product that you want!
 			</p>
 			<hr class="my-4">
-			<div class="card-group">
+
+			<h1>Products on discount</h1>
+			<div class="row">
+
 				{% for product in products %}
 					{% if product.onSale %}
-						<div class="card display-flex mt-4" style="width: 18rem; padding:10px;">
-							<div class="card-body">
-								<h5 class="card-title">{{ product.Name }}</h5>
-								<h6 class="card-subtitle mb-2 text-muted">Price:
-									{{ product.PBT }}</h6>
-								<p class="card-text">{{ product.Description }}</p>
-								<a href="#" class="card-link">{{ product.category.getTitle()}}</a>
-								{# <a href="#" class="card-link">Another link</a> #}
 
+						<div class="col-md-4 mb-3">
+							<div class="card">
+								<div class="card-body">
+									<h5 class="card-title">{{ product.Name }}</h5>
+									<h6 class="card-subtitle mb-2 text-muted">Price:
+										{{ product.PBT }}</h6>
+									<p class="card-text">{{ product.Description }}</p>
+									<a href="#" class="card-link">{{ product.category.getTitle()}}</a>
+									{# <a href="#" class="card-link">Another link</a> #}
+
+								</div>
 							</div>
 						</div>
 					{% endif %}
 				{% endfor %}
 			</div>
-
-			<p>Pour commencer, rendez-vous sur la page d'inscription pour utiliser l'application.</p>
-			<p class="lead">
-				<a class="btn btn-primary btn-lg" href="#" role="button">Inscription</a>
-			</p>
 		</div>
+		<p>Pour commencer, rendez-vous sur la page d'inscription pour utiliser l'application.</p>
+		<p class="lead">
+			<a class="btn btn-primary btn-lg" href="#" role="button">Register</a>
+		</p>
 	</div>
-{% endblock %}
+</div>{% endblock %}

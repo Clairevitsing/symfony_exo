@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use symfony\component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[UniqueEntity('name')]
 class Product
 {
     #[ORM\Id]
@@ -14,11 +17,13 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50, nullable: true)]
+    #[Assert\Length(min: 2, max: 50)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Description = null;
+    #[ORM\Column(length: 255, type: Types::TEXT)]
+    #[Assert\NotBlank()]
+    private string $description;
 
     #[ORM\Column]
     private ?float $PBT = null;
@@ -55,12 +60,12 @@ class Product
 
     public function getDescription(): ?string
     {
-        return $this->Description;
+        return $this->description;
     }
 
     public function setDescription(string $Description): self
     {
-        $this->Description = $Description;
+        $this->description = $Description;
 
         return $this;
     }

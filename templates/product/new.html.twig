@@ -1,0 +1,24 @@
+{%  extends "base.html.twig" %}
+
+{% block body %}
+	<div
+		class="container">
+		{# {% if form_errors(form) %}
+							<div class="alert alert-danger">
+								{{ form_errors(form) }}
+							</div>
+						{% endif %} #}
+		{% for message in app.flashes('success') %}
+			<div class="alert alert-success mt-4">
+				{{ message }}
+			</div>
+		{% endfor %}
+
+
+		<h1 class="mt-4">
+			create a new product
+		</h1>
+
+		{{ form(form)}}
+		</div>
+	{% endblock %}
