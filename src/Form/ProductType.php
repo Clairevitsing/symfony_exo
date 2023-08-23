@@ -38,33 +38,42 @@ class ProductType extends AbstractType
                 ]
             ])
 
-            ->add('Description', TextareaType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+            ->add(
+                'Description',
+                TextareaType::class,
+                [
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
 
-                'label' => 'Description',
-                'label_attr' => [
-                    'class' => 'form-label mt-4',
-                ],
-                'constraints' => [
-                    new Assert\NotBlank(),
+                    'label' => 'Description',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4',
+                    ],
+                    'constraints' => [
+                        new Assert\NotBlank(),
+                    ]
                 ]
-            ])
-            ->add('PBT', MoneyType::class, [
-                'attr' => [
-                    'class' => 'form-control',
-                ],
+            )
+            ->add(
+                'PBT',
+                MoneyType::class,
+                [
+                    'attr' => [
+                        'class' => 'form-control',
+                    ],
 
-                'label' => 'Price',
-                'label_attr' => [
-                    'class' => 'form-label mt-4',
-                ],
-                'constraints' => [
-                    new Assert\Positive(),
-                    new Assert\LessThan(9999.99),
+                    'currency' => 'TWD',
+                    'label' => 'Price',
+                    'label_attr' => [
+                        'class' => 'form-label mt-4',
+                    ],
+                    'constraints' => [
+                        new Assert\Positive(),
+                        new Assert\LessThan(9999.99),
+                    ]
                 ]
-            ])
+            )
             ->add('visible',  CheckboxType::class, [
                 'attr' => [
                     'class' => 'form-check-input',
@@ -89,16 +98,16 @@ class ProductType extends AbstractType
             ])
 
 
-            ->add('dateCreated', DateTimeType::class, [
-                'widget' => 'single_text',
-                'data' => new \DateTimeImmutable('now'),
-                'label_attr' => [
-                    'class' => 'form-label mt-4',
-                ],
-                'constraints' => [
-                    new Assert\NotNull(),
-                ]
-            ])
+            // ->add('dateCreated', DateTimeType::class, [
+            //     'widget' => 'single_text',
+            //     'data' => new \DateTimeImmutable('now'),
+            //     'label_attr' => [
+            //         'class' => 'form-label mt-4',
+            //     ],
+            //     'constraints' => [
+            //         new Assert\NotNull(),
+            //     ]
+            // ])
 
             ->add('category', EntityType::class, [
                 'class' => Category::class,

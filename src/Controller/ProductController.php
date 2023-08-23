@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+
 class ProductController extends AbstractController
 {
     #[Route('/products', name: 'product_list')]
@@ -23,7 +24,8 @@ class ProductController extends AbstractController
 
     ): Response {
         $products = $paginator->paginate(
-            $productRepository->findAll(),
+            $productRepository->findBy(['visible' => true]),
+            // $productRepository->findAll(),
             $request->query->getInt('page', 1),
             12
         );
@@ -38,7 +40,7 @@ class ProductController extends AbstractController
         Product $product
     ): Response {
         return $this->render('product/item.html.twig', [
-            'product' => $product,
+            'product' => $product
         ]);
     }
 
@@ -67,8 +69,8 @@ class ProductController extends AbstractController
             );
             return $this->redirectToRoute('product_list');
         }
-        return $this->render('product/new.html.twig', [
-            'form' => $form->createView()
+        return $this->renderForm('product/new.html.twig', [
+            'form' => $form
         ]);
     }
     #[Route('/product/edit/{id}', name: 'product_edit')]
@@ -85,7 +87,7 @@ class ProductController extends AbstractController
             // dd($form->getData);
             $product = $form->getData();
             // dd($product);
-            $manager->persist($product);
+            // $manager->persist($product);
             $manager->flush();
 
             $this->addFlash(
@@ -101,7 +103,7 @@ class ProductController extends AbstractController
 
     #[Route('/product/delete/{id}', name: 'product_delete')]
     public function delete(
-        Request $request,
+
         ProductRepository $productRepository,
         EntityManagerInterface $manager,
         $id
